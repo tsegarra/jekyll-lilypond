@@ -35,7 +35,4 @@
       {% endif %}
     }
   }
-  \midi { 
-    \tempo 4 = {{ tempo | default: "120" }}
-  }
 }
