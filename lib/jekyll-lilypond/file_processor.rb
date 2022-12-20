@@ -35,15 +35,17 @@ module Jekyll
       end
 
       def trim_svg
-        if File.exist?("#{filepath}.svg")
-          Kernel.system("inkscape", 
-                        "#{filepath}.svg", 
-                        "--export-area-drawing", 
-                        "--export-type=svg", 
-                        "--export-filename=#{filepath}.svg")
-        else
-          raise RuntimeError.new(
-            "Cannot trim SVG: expected SVG file #{filepath}.svg does not exist")
+        unless File.exist?("#{filepath}_trimmed.svg")
+          if File.exist?("#{filepath}.svg")
+            Kernel.system("inkscape", 
+                          "#{filepath}.svg", 
+                          "--export-area-drawing", 
+                          "--export-type=svg", 
+                          "--export-filename=#{filepath}_trimmed.svg")
+          else
+            raise RuntimeError.new(
+              "Cannot trim SVG: expected SVG file #{filepath}.svg does not exist")
+          end
         end
       end
 

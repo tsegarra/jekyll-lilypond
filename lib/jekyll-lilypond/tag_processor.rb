@@ -21,7 +21,8 @@ module Jekyll
       end
 
       def include
-        @tag.attrs.update("filename" => hash)
+        trimmed = if @tag.attrs["trim"] == "true" then "_trimmed" else "" end
+        @tag.attrs.update("filename" => hash + trimmed)
         @tag.attrs.update("baseurl" => @site.baseurl)
         include_template_obj.render(@tag)
       end
